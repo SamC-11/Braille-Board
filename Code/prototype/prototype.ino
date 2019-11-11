@@ -2,7 +2,7 @@
 #include <SPI.h>
 
 
-Servo servo[2];
+Servo servo1;
 char moduleOneArray[3] = {'0', '0', '0'};
 
 const byte numChars = 32;
@@ -14,7 +14,9 @@ boolean newData = false;
 
 void setup() {
   // put your setup code here, to run once:
-  configureServos();
+  //configureServos();
+  servo1.attach(4);
+  servo1.write(0);
   Serial.begin(9600);
   delay(500);
 }
@@ -44,16 +46,23 @@ void loop() {
 //  }//for i
 
   
+  
 
-
-
-//  servo1.detach();
+    servo1.write(180);
+    delay(500);
+    servo1.write(0);
+    delay(500);
+    servo1.write(180);
+    delay(500);
+    servo1.write(0);
+    delay(500);
+    servo1.detach();
 //  servo2.detach();
 }
-
-void configureServos(){
-  for(int i = 4; i < 6; i++){
-    servo[i].attach(i);
-    servo[i].write(0);
-  }
-}
+//
+//void configureServos(){
+//  for(int i = 4; i < 6; i++){
+//    servo[i].attach(i);
+//    servo[i].write(0);
+//  }
+//}
