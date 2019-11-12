@@ -1,0 +1,113 @@
+//
+//    switch(number){
+//      case 0:
+//        //put all servos in position 0 (retracted)
+//        servo1.write(retracted);
+//        delay(500);
+//        break;
+//      case 1:
+//        //generate servos for A
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = A[i]; //machine learning
+//        }
+//        delay(500);
+//        break;
+//      case 2:
+//        //generate servos for B
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = B[i];
+//        }
+//        delay(500);
+//        break;
+//      case 3:
+//        //generate servos for C
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = C[i];
+//        }
+//        break;
+//      case 4:
+//        //generate servos for D
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = D[i];
+//        }
+//        break;
+//      case 5:
+//        //generate servos for E
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = E[i];
+//        }
+//        break;
+//      case 6:
+//        //generate servos for F
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = F[i];
+//        }
+//        break;
+//      case 7:
+//        //generate servos for G
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = G[i];
+//        }
+//        break;
+//      case 8:
+//        //generate servos for H
+//        for(int i = 1; i <= 6; i++){
+//          module1Servos[i] = H[i];
+//        }
+//        break;
+//      case 9:
+//        //generate servos for I
+//        break;
+//      case 10:
+//        //generate servos for J
+//        break;
+//      case 11:
+//        //generate servos for K
+//        break;
+//      case 12:
+//        //generate servos for L 
+//        break;
+//      case 13:
+//        //generate servos for M
+//        break;
+//      case 14:
+//        //generate servos for N
+//        break;
+//      case 15:
+//        //generate servos for O
+//        break;
+//      case 16:
+//        //generate servos for P
+//        break;
+//      case 17:
+//        //generate servos for Q
+//        break;
+//      case 18:
+//        //generate servos for R
+//        break;
+//      case 19:
+//        //generate servos for S
+//        break;
+//      case 20:
+//        //generate servos for T
+//        break;
+//      case 21:
+//        //generate servos for U
+//        break;
+//      case 22:
+//        //generate servos for V
+//        break;
+//      case 23:
+//        //generate servos for W
+//        break;
+//      case 24:
+//        //generate servos for X
+//        break;
+//      case 25:
+//        //generate servos for Y
+//        break;
+//      case 26:
+//        //generate servos for Z
+//        break;   
+//      
+//    }
