@@ -6,14 +6,27 @@
 #define NUMBER_OF_SERVOS 6 //Number of servos in 1 module
 #define EXTENDED 180 //Degree of servo for a raised bump
 #define RETRACTED 0 //Degree of servo for an unraised bump
+#defin NUMBER_OF_SYMBOLS 27
 
-/** Servo Mapping information
- * Servo mapping is as follows, where each square bracket is a servo
+/** Servo hardware mapping information
+ * The motor mapping is as follows, where each square bracket is a servo
  * [1] [4]
  * [2] [5]
  * [3] [6]
  * This as a linear array translates to {1,2,3,4,5,6}
  */
+
+ /** Servo numbering information
+  *  Follows the hardware mapping information, starts at 1 and ends at 6.
+  *  When looping through remember it does NOT start at 0.
+  */
+
+ /** Index of symbols inside the mapping array initialized below
+  *  index 0 = space
+  *  index 1 = A
+  *  ...
+  *  index 26 = Z
+  */
 
 
 //Number received from Slave-Pi 
@@ -32,9 +45,10 @@ typedef struct{
 
 //Servo matrix initializations for supported characters.
 //letters
-servoMatrix A = {1,0,0,0,0,0};
-servoMatrix B = {1,1,0,0,0,0};
-servoMatrix C = {1,0,0,1,0,0};
+servoMatrix space = {0,0,0,0,0,0}; 
+servoMatrix A = {1,0,0,0,0,0}; 
+servoMatrix B = {1,1,0,0,0,0}; 
+servoMatrix C = {1,0,0,1,0,0}; 
 servoMatrix D = {1,0,0,1,1,0};
 servoMatrix E = {1,0,0,0,1,0};
 servoMatrix F = {1,1,0,1,0,0};
@@ -57,21 +71,20 @@ servoMatrix V = {1,1,1,0,0,1};
 servoMatrix W = {0,1,0,1,1,1};
 servoMatrix X = {1,0,1,1,0,1};
 servoMatrix Y = {1,0,1,1,1,1};
-servoMatrix Z = {1,0,1,0,1,1}; 
-//symbols
+servoMatrix Z = {1,0,1,0,1,1};//26 
+//symbols coming soon
 servoMatrix comma = {0,0,0,0,0,0};
 servoMatrix period = {0,0,0,0,0,0};
 servoMatrix questionMark = {0,0,0,0,0,0};
-servoMatrix space = {0,0,0,0,0,0};
 servoMatrix exclamationMark = {0,0,0,0,0,0};
 servoMatrix colon = {0,0,0,0,0,0};
 servoMatrix semiColon = {0,0,0,0,0,0};
 
 //Number mapping for matrix. Slave-Pi will send the index of the braille symbol to display.
-servoMatrix mapping[6] = {space,A,B,C,D,E};
+servoMatrix *mapping[NUMBER_OF_SYMBOLS] = {&space,&A,&B,&C,&D,&E,&F,&G,&H,&I,&J,&K,&L,&M,&N,&O,&P,&Q,&R,&S,&T,&U,&V,&W,&X,&Y,&Z};
 
 //Servos for Module 1
-Servo module1Servos[6];
+Servo module1Servos[NUMBER_OF_SERVOS];
 
 void setup() {
   Serial.begin(9600); // start serial for output
@@ -102,7 +115,7 @@ void receiveData(int byteCount){
     Serial.print("data received: ");
     Serial.println(number);
     
-    servoMatrix current = mapping[number];  //Current servoMatrix now is the same as the servoMatrix in the index sent by Slave-Pi
+    servoMatrix current = *(mapping[number]);  //Current servoMatrix now is the same as the servoMatrix in the index sent by Slave-Pi
 
     for(int i = 1; i <= NUMBER_OF_SERVOS; i++){ //Loop through each value in the servo structure
       switch(returnServoValue(&current, i)){ //Select state of servo (extended or retracted), based on value of servo in the matrix
