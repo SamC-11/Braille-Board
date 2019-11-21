@@ -6,7 +6,7 @@
 #define NUMBER_OF_SERVOS 6 //Number of servos in 1 module
 #define EXTENDED 180 //Degree of servo for a raised bump
 #define RETRACTED 0 //Degree of servo for an unraised bump
-#defin NUMBER_OF_SYMBOLS 27
+#define NUMBER_OF_SYMBOLS 27 //Allows for modularity and additions. 
 
 /** Servo hardware mapping information
  * The motor mapping is as follows, where each square bracket is a servo
@@ -14,9 +14,8 @@
  * [2] [5]
  * [3] [6]
  * This as a linear array translates to {1,2,3,4,5,6}
- */
-
- /** Servo numbering information
+ *
+ *Servo numbering information
   *  Follows the hardware mapping information, starts at 1 and ends at 6.
   *  When looping through remember it does NOT start at 0.
   */
@@ -94,11 +93,12 @@ void setup() {
   Wire.onReceive(receiveData);
   Wire.onRequest(sendData);
 
-  //initialize servos
-  for(int i = 1; i <= NUMBER_OF_SERVOS; i++){
-    module1Servos[i].attach(i);
-    module1Servos[i].write(RETRACTED);
-  }
+  //initialize servos. Note that Servo mapping beggins at digital PWM pin 1, simply add offset if you want to start at another pin.
+//  for(int i = 1; i <= NUMBER_OF_SERVOS; i++){
+//    module1Servos[i].attach(i);
+//    module1Servos[i].write(RETRACTED);
+//  }
+
 
   Serial.println("Initialization completed.");
 }
@@ -107,7 +107,7 @@ void loop(){
   delay(100);
 }
 
-// callback for received data
+// callback function for received data
 void receiveData(int byteCount){
   
   while(Wire.available()) { //Reading from Slave-Pi
@@ -120,10 +120,10 @@ void receiveData(int byteCount){
     for(int i = 1; i <= NUMBER_OF_SERVOS; i++){ //Loop through each value in the servo structure
       switch(returnServoValue(&current, i)){ //Select state of servo (extended or retracted), based on value of servo in the matrix
         case 1:
-          module1Servos[i].write(EXTENDED);
+          module1Servos[i].write(EXTENDED); //set servo to EXTENDED state (180 degrees)
           break;
         case 0:
-          module1Servos[i].write(RETRACTED);
+          module1Servos[i].write(RETRACTED); //set servo to RETRACTED state (0 degrees)
           break;
         case -1:
           //exception handling code here
@@ -137,7 +137,7 @@ void receiveData(int byteCount){
   //end of function
 }
 
-// callback for sending data
+// callback function for sending data
 void sendData(){
   Wire.write(number);
 }
@@ -148,7 +148,7 @@ void sendData(){
  */
 int returnServoValue(servoMatrix *current, int index){
   int returnValue;
-  switch(index){
+  switch(index){ //Take index input and return value of the servoMatrix structure passed in
     case 1:
       returnValue = current->first;
       break;
