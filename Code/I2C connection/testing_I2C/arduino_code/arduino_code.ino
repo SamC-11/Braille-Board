@@ -98,8 +98,8 @@ void setup() {
   module1Servos[1].attach(2);
   module1Servos[2].attach(3);
   module1Servos[3].attach(4);
-  module1Servos[4].attach(5);
-  module1Servos[5].attach(7);
+  module1Servos[4].attach(8);
+  module1Servos[5].attach(10);
 
   Serial.println("Initialization completed.");
 }

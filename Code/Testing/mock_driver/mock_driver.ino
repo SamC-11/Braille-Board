@@ -22,7 +22,7 @@ void setup() {
   Wire.onRequest(sendData);
   // put your setup code here, to run once:
   servo[0].attach(8);
-  servo[1].attach(9);
+  servo[1].attach(10);
   servo[2].attach(3);
   servo[3].attach(4);
   servo[4].attach(5);
@@ -51,7 +51,7 @@ void receiveData(int byteCount){
     }else{
       servo[number].write(0);
       delay(500);
-      state ^=1;  
+      state[number] ^= 1;  
     }
     
   }//while
@@ -60,5 +60,5 @@ void receiveData(int byteCount){
 
 // callback function for sending data
 void sendData(){
-  Wire.write(number);
+  Wire.write(number+1);
 }
